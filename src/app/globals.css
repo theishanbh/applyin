@@ -2,32 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+.wrapper {
+  margin: 0 auto; /* Center the wrapper horizontally */
+  padding: 0 20px; /* Add padding to the wrapper */
+  max-width: 1200px; /* Set maximum width for the wrapper */
+}
+
+/*  Making the wrapper full-width on small screens */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 0 10px; /* Adjust padding for smaller screens */
+    max-width: 100%; /* Set maximum width to 100% on small screens */
   }
 }
