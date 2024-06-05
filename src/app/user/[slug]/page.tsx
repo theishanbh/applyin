@@ -1,7 +1,17 @@
 import BlogList from "@/components/BlogList";
 import Navbar from "@/components/Navbar";
+import UserProfile from "@/components/UserProfile";
 
-export default function Home() {
+export default function Profile() {
+  const user = {
+    name: "John Doe",
+    username: "johndoe",
+    email: "john.doe@example.com",
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    profilePicture: "https://via.placeholder.com/150",
+    joinDate: "2023-01-15",
+  };
+
   const blogPosts = [
     {
       id: "1",
@@ -25,7 +35,10 @@ export default function Home() {
   return (
     <main>
       <Navbar></Navbar>
-      <BlogList posts={blogPosts} />
+      <main className="wrapper ">
+        <UserProfile user={user} />
+        <BlogList posts={blogPosts} />
+      </main>
     </main>
   );
 }

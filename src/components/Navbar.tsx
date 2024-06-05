@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import ProfileDropdown from "./ProfileDropDown";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,55 +20,15 @@ const Navbar = () => {
               <p className="text-gray-800">MyBlog</p>
             </Link>
           </div>
-          <div className="hidden md:flex space-x-6">
-            <Link href="/">
-              <p className="text-gray-800 hover:text-blue-500">Home</p>
-            </Link>
+          <div className="flex justify-center items-center space-x-6">
             <Link href="/posts">
               <p className="text-gray-800 hover:text-blue-500">Create</p>
             </Link>
-            <Link href="/profile">
-              <p className="text-gray-800 hover:text-blue-500">Profile</p>
-            </Link>
-          </div>
-          <div className="md:hidden">
-            <button
-              onClick={toggleMenu}
-              className="text-gray-800 hover:text-blue-500 focus:outline-none focus:text-blue-500"
-            >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M4 6h16M4 12h16m-7 6h7" />
-              </svg>
-            </button>
+            <div className="inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <ProfileDropdown />
+            </div>
           </div>
         </div>
-        {menuOpen && (
-          <div className="md:hidden">
-            <Link href="/">
-              <p className="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-200">
-                Home
-              </p>
-            </Link>
-            <Link href="/posts">
-              <p className="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-200">
-                Create
-              </p>
-            </Link>
-            <Link href="/profile">
-              <p className="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-200">
-                Profile
-              </p>
-            </Link>
-          </div>
-        )}
       </div>
     </nav>
   );
