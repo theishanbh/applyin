@@ -1,6 +1,10 @@
+"use client";
+
 import BlogList from "@/components/BlogList";
 import Navbar from "@/components/Navbar";
 import { connectDB } from "@/db/client";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 export default function Home() {
   const blogPosts = [
@@ -24,6 +28,15 @@ export default function Home() {
   ];
 
   const db = connectDB();
+
+  // const [logged, setLogged] = useState(false);
+
+  // const { data: session, status } = useSession();
+  // console.log(session, status);
+  // if (status === "authenticated") {
+  //   setLogged(true);
+  // }
+
   return (
     <main>
       <Navbar></Navbar>

@@ -25,7 +25,7 @@ const BlogList: React.FC<BlogListProps> = ({ posts }) => {
             <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
             <div className="flex justify-between items-center text-gray-500 mb-4">
               <p>By {post.author}</p>
-              <p>{new Date(post.date).toLocaleDateString()}</p>
+              {/* <p>{new Date(post.date).toLocaleDateString()}</p> */}
             </div>
             <p className="text-gray-700 mb-4">{post.summary}</p>
             <div className="mt-4">

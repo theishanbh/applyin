@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 const ProfileDropdown: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,14 +65,14 @@ const ProfileDropdown: React.FC = () => {
                 Settings
               </p>
             </Link>
-            <Link href="/logout">
+            <button onClick={() => signOut()}>
               <p
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 role="menuitem"
               >
                 Logout
               </p>
-            </Link>
+            </button>
           </div>
         </div>
       )}

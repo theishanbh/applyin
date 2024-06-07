@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Settings from "@/components/Settings";
-import { UserSettings } from "../../types";
+import { UserSettings } from "../../../types";
 import Navbar from "@/components/Navbar";
 
 const SettingsPage = () => {

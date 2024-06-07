@@ -12,8 +12,8 @@ export const options: NextAuthOptions = {
   ],
   callbacks: {
     async session({ session }) {
-      const sessionUser = await User.findOne({ email: session.user?.email });
-      session.user._id = sessionUser._id;
+      // const sessionUser = await User.findOne({ email: session.user?.email });
+      // session.user._id = sessionUser._id;
       return session;
     },
     async signIn({ profile }) {
@@ -22,17 +22,34 @@ export const options: NextAuthOptions = {
         await connectDB();
         const userExist = await User.findOne({ email: profile?.email });
         if (!userExist) {
+          const str = profile?.email?.split("@")[0];
           const user = await User.create({
             email: profile?.email,
-            name: profile?.name,
+            username: str,
             image: profile?.image,
+            name: profile?.name,
+            profile: profile?.picture,
           });
+          console.log(user);
         }
+        console.log(profile);
         return true;
       } catch (error) {
         console.log(error);
         return false;
       }
     },
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
+    },
   },
+  pages: {
+    signIn: "/auth/signin",
+    signOut: "/auth/signout",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 };

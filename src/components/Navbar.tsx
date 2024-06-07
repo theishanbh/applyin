@@ -1,15 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
 import Link from "next/link";
 import ProfileDropdown from "./ProfileDropDown";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const { status } = useSession();
 
   return (
     <nav className="bg-white shadow-md">
@@ -24,9 +20,15 @@ const Navbar = () => {
             <Link href="/posts">
               <p className="text-gray-800 hover:text-blue-500">Create</p>
             </Link>
-            <div className="inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <ProfileDropdown />
-            </div>
+            {status !== "authenticated" ? (
+              <Link href="/signin">
+                <p className="text-gray-800 hover:text-blue-500">Login</p>
+              </Link>
+            ) : (
+              <div className="inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <ProfileDropdown />
+              </div>
+            )}
           </div>
         </div>
       </div>
