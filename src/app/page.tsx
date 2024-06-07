@@ -1,5 +1,6 @@
 import BlogList from "@/components/BlogList";
 import Navbar from "@/components/Navbar";
+import { connectDB } from "@/db/client";
 
 export default function Home() {
   const blogPosts = [
@@ -22,6 +23,7 @@ export default function Home() {
     // Add more blog posts as needed
   ];
 
+  const db = connectDB();
   return (
     <main>
       <Navbar></Navbar>

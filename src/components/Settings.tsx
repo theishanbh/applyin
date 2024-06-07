@@ -1,6 +1,6 @@
 "use client";
 
-import { UserSettings } from "@/types";
+import { UserSettings } from "../types";
 import React, { useState } from "react";
 
 interface SettingsProps {
