@@ -17,17 +17,21 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex justify-center items-center space-x-6">
-            <Link href="/posts">
-              <p className="text-gray-800 hover:text-blue-500">Create</p>
-            </Link>
             {status !== "authenticated" ? (
-              <Link href="/signin">
-                <p className="text-gray-800 hover:text-blue-500">Login</p>
-              </Link>
+              <>
+                <Link href="/signin">
+                  <p className="text-gray-800 hover:text-blue-500">Login</p>
+                </Link>
+              </>
             ) : (
-              <div className="inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <ProfileDropdown />
-              </div>
+              <>
+                <Link href="/create">
+                  <p className="text-gray-800 hover:text-blue-500">Create</p>
+                </Link>
+                <div className="inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <ProfileDropdown />
+                </div>
+              </>
             )}
           </div>
         </div>

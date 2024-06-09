@@ -4,43 +4,38 @@ import BlogList from "@/components/BlogList";
 import Navbar from "@/components/Navbar";
 import { connectDB } from "@/db/client";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const blogPosts = [
-    {
-      id: "1",
-      title: "My First Blog Post",
-      summary: "This is a summary of the first blog post.",
-      author: "John Doe",
-      date: "2023-06-05",
-      tags: ["JavaScript", "React", "Next.js"],
-    },
-    {
-      id: "2",
-      title: "Learning Tailwind CSS",
-      summary: "This is a summary of the blog post about Tailwind CSS.",
-      author: "Jane Smith",
-      date: "2023-06-10",
-      tags: ["CSS", "Tailwind", "Styling"],
-    },
-    // Add more blog posts as needed
-  ];
+  const [blogs, setBlogs] = useState([]);
 
-  const db = connectDB();
+  const { data } = useSession();
+  console.log(data);
 
-  // const [logged, setLogged] = useState(false);
+  const getAllPosts = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/posts/", {
+        method: "GET",
+      });
+      if (response) {
+        const post = await response.json();
+        setBlogs(post);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // const { data: session, status } = useSession();
-  // console.log(session, status);
-  // if (status === "authenticated") {
-  //   setLogged(true);
-  // }
+  useEffect(() => {
+    getAllPosts();
+  }, []);
+
+  // const db = connectDB();
 
   return (
     <main>
       <Navbar></Navbar>
-      <BlogList posts={blogPosts} />
+      <BlogList posts={blogs} />
     </main>
   );
 }

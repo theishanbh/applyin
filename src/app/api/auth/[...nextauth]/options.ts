@@ -12,8 +12,12 @@ export const options: NextAuthOptions = {
   ],
   callbacks: {
     async session({ session }) {
-      // const sessionUser = await User.findOne({ email: session.user?.email });
-      // session.user._id = sessionUser._id;
+      const sessionUser = await User.findOne({ email: session.user?.email });
+      session.user._id = sessionUser._id;
+      session.user.username = sessionUser.username;
+      session.user.email = sessionUser.email;
+      session.user.name = sessionUser.name;
+      session.user.profile = sessionUser.profile;
       return session;
     },
     async signIn({ profile }) {
@@ -26,7 +30,6 @@ export const options: NextAuthOptions = {
           const user = await User.create({
             email: profile?.email,
             username: str,
-            image: profile?.image,
             name: profile?.name,
             profile: profile?.picture,
           });
@@ -41,7 +44,7 @@ export const options: NextAuthOptions = {
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      if (url.startsWith("/")) return `${baseUrl}`;
       // Allows callback URLs on the same origin
       else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;

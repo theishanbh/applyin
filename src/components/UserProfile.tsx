@@ -1,4 +1,4 @@
-import React from "react";
+import moment from "moment";
 
 interface UserProfileProps {
   user: {
@@ -6,23 +6,19 @@ interface UserProfileProps {
     username: string;
     email: string;
     bio: string;
-    profilePicture: string;
-    joinDate: string;
+    profile: string;
+    joinDate: Date;
   };
 }
 
 const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
   return (
-    <div className="max-w-2xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-      <div
-        className="bg-cover bg-center h-40"
-        style={{ backgroundImage: `url(${user.profilePicture})` }}
-      ></div>
+    <div className="max-w-2xl mt-4 mx-auto bg-white shadow-md rounded-lg overflow-hidden">
       <div className="p-6">
         <div className="flex items-center mb-4">
           <img
             className="w-16 h-16 rounded-full border-2 border-gray-200"
-            src={user.profilePicture}
+            src={"./user.jpg"}
             alt={`${user.name}'s profile picture`}
           />
           <div className="ml-4">
@@ -37,7 +33,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
           </p>
           <p>
             <strong>Joined:</strong>{" "}
-            {new Date(user.joinDate).toLocaleDateString()}
+            {moment(user.joinDate).format("YYYY-MM-DD")}
           </p>
         </div>
       </div>

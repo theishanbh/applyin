@@ -21,7 +21,7 @@ const ProfileDropdown: React.FC = () => {
           onClick={toggleDropdown}
         >
           <img
-            src="https://via.placeholder.com/40"
+            src="./user.jpg"
             alt="Profile"
             className="rounded-full w-7 h-7 mr-2"
           />
@@ -49,7 +49,7 @@ const ProfileDropdown: React.FC = () => {
           aria-labelledby="options-menu"
         >
           <div className="py-1" role="none">
-            <Link href="/user/x">
+            <Link href="/user">
               <p
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 role="menuitem"
