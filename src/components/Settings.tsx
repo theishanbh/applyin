@@ -26,8 +26,26 @@ const Settings: React.FC<SettingsProps> = ({ initialSettings }) => {
     });
   };
 
+  function updateUser() {
+    fetch("http://localhost:3000/api/posts/user/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(settings),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    updateUser();
+
     // Handle form submission, e.g., send settings to an API
     console.log("Updated settings:", settings);
   };
@@ -36,6 +54,7 @@ const Settings: React.FC<SettingsProps> = ({ initialSettings }) => {
     <div className="max-w-4xl mx-auto py-10">
       <h1 className="text-3xl font-bold mb-6">Settings</h1>
       <form onSubmit={handleSubmit}>
+        {/* username */}
         <div className="mb-4">
           <label
             htmlFor="username"
@@ -52,7 +71,7 @@ const Settings: React.FC<SettingsProps> = ({ initialSettings }) => {
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
-
+        {/* email */}
         <div className="mb-4">
           <label
             htmlFor="email"
@@ -69,41 +88,22 @@ const Settings: React.FC<SettingsProps> = ({ initialSettings }) => {
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
-
+        {/* name */}
         <div className="mb-4">
           <label
-            htmlFor="notifications"
+            htmlFor="name"
             className="block text-sm font-medium text-gray-700"
           >
-            Notifications
+            Name
           </label>
           <input
-            type="checkbox"
-            name="notifications"
-            id="notifications"
-            checked={settings.notifications}
+            type="name"
+            name="name"
+            id="name"
+            value={settings.name}
             onChange={handleInputChange}
-            className="mt-1 block h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="theme"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Theme
-          </label>
-          <select
-            name="theme"
-            id="theme"
-            value={settings.theme}
-            onChange={handleSelectChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          >
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
-          </select>
         </div>
 
         <div>
