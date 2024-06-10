@@ -13,9 +13,9 @@ const SettingsPage = () => {
   const user = data?.user;
   // console.log(user);
   const [settings, setSettings] = useState({
-    username: user?.username,
-    email: user?.email,
-    name: user?.name,
+    username: user?.username as string,
+    email: user?.email as string,
+    name: user?.name as string,
   });
   // console.log(user);
 

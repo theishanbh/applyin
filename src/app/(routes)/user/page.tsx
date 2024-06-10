@@ -28,6 +28,18 @@ export default function Profile() {
       setUser(data);
     });
   }
+
+  const handleDelete = async (postId: string) => {
+    try {
+      await axios.delete(`/api/posts/${postId}`).then(() => {
+        getPosts(id as string);
+      });
+      // Optionally, you could add logic to update the UI after deletion
+      alert("Post deleted successfully");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
   function getPosts(id: string) {
     fetch("http://localhost:3000/api/posts/user", {
       method: "POST",
@@ -53,59 +65,16 @@ export default function Profile() {
     }
   }, [status, x, id]);
 
-  // const getUser = async () => {
-  //   try {
-  //     const response = await fetch(url, {
-  //       method: "GET",
-  //     });
-  //     if (response) {
-  //       const user = await response.json();
-  //       console.log(user);
-  //       setUser(user);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getUser();
-  // }, []);
-  // const user = {
-  //   name: "John Doe",
-  //   username: "johndoe",
-  //   email: "john.doe@example.com",
-  //   bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  //   profilePicture: "https://via.placeholder.com/150",
-  //   joinDate: "2023-01-15",
-  // };
-
-  const blogPosts = [
-    {
-      id: "1",
-      title: "My First Blog Post",
-      summary: "This is a summary of the first blog post.",
-      author: "John Doe",
-      date: "2023-06-05",
-      tags: ["JavaScript", "React", "Next.js"],
-    },
-    {
-      id: "2",
-      title: "Learning Tailwind CSS",
-      summary: "This is a summary of the blog post about Tailwind CSS.",
-      author: "Jane Smith",
-      date: "2023-06-10",
-      tags: ["CSS", "Tailwind", "Styling"],
-    },
-    // Add more blog posts as needed
-  ];
-
   return (
     <main>
       <Navbar></Navbar>
       <main className="wrapper ">
         <UserProfile user={user} />
-        <BlogList posts={blogs} />
+        <BlogList
+          posts={blogs}
+          user={data?.user._id as string}
+          handleDelete={handleDelete}
+        />
       </main>
     </main>
   );

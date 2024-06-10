@@ -14,5 +14,22 @@ export async function GET() {
 
 // INSERT BLOG POST
 export async function POST(request: Request) {
-  const blog = await request.json();
+  await connectDB();
+  const data = await request.json();
+  console.log(data);
+  const post = await Blog.create({
+    authorId: data?.authorId,
+    author: data?.author,
+    title: data.title,
+    versions: data.content,
+    tags: data.tags,
+    categories: data.categories,
+  });
+  console.log(post);
+  return new Response(JSON.stringify(post), {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    status: 201,
+  });
 }

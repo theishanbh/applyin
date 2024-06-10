@@ -6,9 +6,9 @@ const blogSchema = new Schema(
     authorId: String,
     author: String,
     title: String,
-    content: String,
-    versions: [{ version_number: Number, content: String }],
+    versions: [String],
     tags: [String],
+    categories: [String],
   },
   {
     timestamps: true,
